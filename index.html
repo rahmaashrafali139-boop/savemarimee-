@@ -1,0 +1,222 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Operation: Save Maryam 💗</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma,Arial,sans-serif;background:linear-gradient(140deg,#fff2f8,#eee8ff);color:#392747}
+main{max-width:760px;margin:auto;padding:20px}
+.card{background:#fff;border:1px solid #f5cfe3;border-radius:24px;padding:24px;margin:18px 0;box-shadow:0 10px 35px #a77a9c18}
+.center{text-align:center}
+h1{color:#8a63df;font-size:clamp(30px,7vw,48px)}
+h2{color:#8a63df}
+p{line-height:1.9}
+button{border:0;border-radius:13px;padding:13px 18px;background:#ff5fa2;color:white;font-weight:bold;cursor:pointer;margin:5px}
+.secondary{background:#eee8ff;color:#6745b8}
+input,select,textarea{width:100%;padding:12px;margin:7px 0 15px;border:1px solid #e6c9dd;border-radius:12px;font:inherit}
+video{width:100%;max-height:420px;background:#21152a;border-radius:14px}
+audio{width:100%;margin:12px 0}
+img{max-width:100%;border-radius:15px}
+.page{display:none}.page.active{display:block}
+.note{background:#fff4b8;padding:13px;border-radius:13px}
+label{font-weight:bold}
+</style>
+</head>
+<body>
+
+<!-- صوت سرينة الإسعاف الجديد -->
+<audio id="siren" src="media/ambulance.mp3" preload="auto"></audio>
+
+<main>
+<section class="card center page active" id="p0">
+<div style="font-size:55px">🚨💗</div>
+<p>بلاغ عاجل من وحدة الطوارئ ضد النكد</p>
+<h1>Operation:<br>Save Maryam</h1>
+<p>يا مريم، تم استدعاء فريق الرخامة والطبطبة فورًا 😂</p>
+<div class="note">تحذير: يحتوي على حب كتير ونكت ممكن تكون بايخة جدًا.</div>
+<button onclick="startRescue()">ابدئي عملية الإنقاذ 🚑</button>
+</section>
+
+<section class="card page" id="p1">
+<h2>🎬 سينما الرخامة</h2>
+<p> . اختاري الفديو اللي عايزاه من الرخامه دي وياريت متشتميش .</p>
+<div id="videoList"></div>
+<div id="videoPlayer"></div>
+<button class="secondary" onclick="show(0)">رجوع</button>
+<button onclick="show(2)">شغّلي الأغنية 🎵</button>
+</section>
+
+<section class="card page" id="p2">
+<h2>🎵 أغنيتنا</h2>
+<p>اختاري تشغيل واستمتعي بالأغنية اللي اخترتهالك 💗</p>
+<audio id="song" controls preload="metadata">
+<source src="media/song.mp3" type="audio/mpeg">
+متصفحك لا يدعم تشغيل الصوت.
+</audio>
+<p id="songHelp" style="font-size:13px;color:#806d88">اسم الملف المطلوب: media/song.mp3</p>
+<button class="secondary" onclick="show(1)">الفيديوهات</button>
+<button onclick="show(3)">نحجز الديت 📅</button>
+</section>
+
+<section class="card page" id="p3">
+<h2>📅 حجز موعد إنقاذ المود</h2>
+<p>اختاري اليوم والساعة والنشاط اللي على مزاجك يا مريم 😂</p>
+<form id="booking">
+<label for="day">اليوم</label>
+<input id="day" type="date" required>
+<label for="time">الساعة</label>
+<input id="time" type="time" required>
+<label for="activity">هنعمل إيه؟</label>
+<select id="activity" required>
+<option value="">اختاري نشاطًا</option>
+<option>🍟 أكل وخروجة</option>
+<option>🍰 كافيه وحاجة حلوة</option>
+<option>🎬 فيلم وقعدة لطيفة</option>
+<option>🤡 ضحك ورخامة ومزاكره هههه</option>
+</select>
+<label for="extra">مكان أو ملاحظة (اختياري)</label>
+<input id="extra" placeholder="المكان اللي نفسك نروحه">
+<button type="submit">تأكيد الاختيار 💌</button>
+</form>
+<div id="result" hidden>
+<div class="note" id="summary"></div>
+<p>ده معاد مقترح، مش حجز مؤكد في مطعم أو مكان.</p>
+<button onclick="sendBooking()">ابعتيلي الحجز على واتساب 📲</button>
+<button class="secondary" onclick="copyBooking()">انسخي تفاصيل الحجز</button>
+</div>
+<button class="secondary" onclick="show(2)">رجوع</button>
+<button onclick="show(4)">الرسالة الأخيرة 💗</button>
+</section>
+
+<section class="card page center" id="p4">
+<div style="font-size:48px">🫶🏻</div>
+<h2>يا مريم يزعلانه ممكن تتضحكي الضحك احلي علييكي وشك ميليقش عليه الزعل يمريومي</h2>
+<p>أنا ممكن أفضل أرخم عليكي طول العمر، بس عمري ما هبطل أحاول أشوفك مبسوطة.</p>
+<p>لو عايزة نضحك هنضحك، ولو عايزة تفضفضي هسمعك، ولو عايزة نسكت ونطلب أكل… أنا موافقة برضه 😂💗</p>
+<label for="message">رسالتك الخاصة</label>
+<textarea id="message" rows="4" placeholder="مريم عارفه انك مبتحبيش تحكي اي حاجه بتضايقك بس انا لما بكون زعلانه مش بتسيبيني الا اما احكي ودي اللحظه اللي بتعرفني اني عندي سند بجد فواجب عليا اعمل معاكي كده ومن غير اي حاجه انتي اختي وشوفتك زعلانه يبقي لازم اعرف اي اللي مضايقك ولو محكيتيش يبقي واجب عليا افرفشك واضحكك واكون جمبك لحد ماتضحكي اضحكي يمريومتي ضحكتك احلي حاجه في الدنيا تعرفي ان الصبح لما بشوفك بتضحكي بعرف ان اليوم هيبقي جميل وبتبسط ولو كشرتي بقول يساترررر يارب ربنا يسترر بحبك يمريومي ويارب دايما اشوفك مبسوطه وضحكتك مرسومه علي وشك ياحن واجدع اخت وصاحبه..."></textarea>
+<button onclick="reveal()">افتحي الرسالة 💌</button>
+<div id="letter" class="note" hidden></div>
+<p>مش لازم تبقي مبسوطة غصب عنك. أنا جنبك 💗</p>
+<button class="secondary" onclick="show(0)">ابدئي من الأول</button>
+</section>
+
+<footer class="center" style="padding:20px;color:#8c7895">Made with love & premium رخامة™ 💗</footer>
+</main>
+
+<script>
+// عدّلي القائمة دي لتطابق أسماء فيديوهاتك داخل مجلد media
+const videos=[
+ {name:"فيديو الترحيب 😂",src:"media/intro.mp4"},
+ {name:"النكتة الأولى",src:"media/joke1.mp4"},
+ {name:"النكتة الثانية",src:"media/joke2.mp4"}
+];
+
+// رقم واتساب كما أدخلتيه
+const MY_WHATSAPP=" +201129540080";
+
+let bookingText="";
+
+// دالة التنقل الأصلية
+function show(n){
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ document.getElementById("p"+n).classList.add("active");
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+// الإضافة الجديدة: فتح صفحة الفيديوهات وتشغيل السرينة
+function startRescue(){
+ show(1);
+
+ const siren=document.getElementById("siren");
+ siren.currentTime=0;
+
+ siren.play().catch(()=>{
+  alert("اضغطي مرة تانية لتشغيل صوت الإسعاف 🚨");
+ });
+}
+
+const list=document.getElementById("videoList");
+videos.forEach((v,i)=>{
+ const b=document.createElement("button");
+ b.textContent=v.name;
+ b.onclick=()=>playVideo(i);
+ list.appendChild(b);
+});
+
+function playVideo(i){
+ const area=document.getElementById("videoPlayer");
+ area.replaceChildren();
+ const title=document.createElement("p");
+ title.textContent=videos[i].name;
+ const video=document.createElement("video");
+ video.controls=true;
+ video.playsInline=true;
+ video.preload="metadata";
+ const source=document.createElement("source");
+ source.src=videos[i].src;
+ source.type="video/mp4";
+ video.appendChild(source);
+ video.append("متصفحك لا يدعم الفيديو.");
+ area.append(title,video);
+ video.play().catch(()=>{});
+}
+
+document.getElementById("day").min=new Date().toLocaleDateString("en-CA");
+
+document.getElementById("booking").addEventListener("submit",e=>{
+ e.preventDefault();
+ const day=document.getElementById("day").value;
+ const time=document.getElementById("time").value;
+ const activity=document.getElementById("activity").value;
+ const extra=document.getElementById("extra").value.trim();
+
+ if(day<document.getElementById("day").min){
+  alert("اختاري يوم من النهارده أو بعده 💗");
+  return;
+ }
+
+ bookingText="💗 حجز ديت إنقاذ مود مريم 💗\nاليوم: "+day+
+ "\nالساعة: "+time+"\nالنشاط: "+activity+
+ (extra?"\nالمكان/ملاحظة: "+extra:"")+
+ "\nالمعاد مقترح وفي انتظار التأكيد 😂";
+
+ document.getElementById("summary").textContent=bookingText;
+ document.getElementById("result").hidden=false;
+});
+
+function sendBooking(){
+ if(!bookingText)return;
+
+ if(!/^\d{10,15}$/.test(MY_WHATSAPP)){
+  alert("عدّلي MY_WHATSAPP في الكود واكتبي رقمك مع كود الدولة، أرقام فقط.");
+  return;
+ }
+
+ window.open("https://wa.me/"+MY_WHATSAPP+"?text="+encodeURIComponent(bookingText),"_blank","noopener");
+}
+
+async function copyBooking(){
+ if(!bookingText)return;
+ try{
+  await navigator.clipboard.writeText(bookingText);
+  alert("اتنسخت التفاصيل 💌");
+ }catch(e){
+  prompt("انسخي تفاصيل الحجز:",bookingText);
+ }
+}
+
+function reveal(){
+ const msg=document.getElementById("message").value.trim();
+ document.getElementById("letter").textContent=
+  msg||"يا مريم، انتي غالية عندي جدًا وأنا جنبك دايمًا 💗";
+ document.getElementById("letter").hidden=false;
+}
+</script>
+</body>
+</html>
+
+ 
